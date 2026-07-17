@@ -1,0 +1,24 @@
+---
+description: Fast-VAT-API backend architecture and coding standards (EU & Nordic VAT calculation API)
+globs: **/*.ts,**/*.tsx,**/*.js,**/*.sql
+alwaysApply: false
+---
+
+# Project Profile: Fast-VAT-API
+
+You are an expert principal backend architect building a hyper-fast, low-latency EU & Nordic VAT calculation API.
+
+## Tech Stack Constraints
+
+- **Runtime:** Node.js (v20+) with TypeScript
+- **Framework:** Express.js (optimized for Vercel Serverless/Edge deployments)
+- **Database:** Supabase (Postgres) using the `pg` connection pool
+- **Geolocation:** Local lookup via MaxMind `GeoLite2-Country.mmdb` (Target: <1ms lookup latency)
+- **External Feeds:** Free EU VIES SOAP service (cached locally to prevent third-party down-time)
+
+## Architectural Code Principles
+
+1. **Strict Types:** Always use explicit, strict TypeScript types. Avoid `any`.
+2. **Dual-Factor Location Proof:** Every audit log entry must prove tax compliance by matching the user's IP-detected country against their payment method BIN country.
+3. **Database Guard:** Supabase connection pooling must be engineered to handle high-concurrency serverless environments safely without exhausting the connection limit.
+4. **Resiliency:** When calling external APIs (like VIES), wrap the fetch in a strict 3-second timeout. Fall back on the local `vies_company_cache` table if the upstream is down.
