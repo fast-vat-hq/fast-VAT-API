@@ -1,0 +1,10 @@
+{
+  "buildCommand": "node scripts/download-geolite2.mjs",
+  "outputDirectory": "public",
+  "functions": {
+    "api/index.ts": {
+      "includeFiles": "data/**"
+    }
+  },
+  "rewrites": [{ "source": "/(.*)", "destination": "/api/index" }]
+}
