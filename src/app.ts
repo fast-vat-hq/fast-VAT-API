@@ -9,9 +9,9 @@ import { writeAuditLog } from "./audit.js";
 export const app = express();
 app.use(express.json());
 
-// Local-only: on Vercel, files in public/ are served by the CDN
-// (express.static is ignored there — see Vercel Express docs).
-app.use(express.static(path.resolve(process.cwd(), "public")));
+// Tester UI files live in web/ (not public/) so Vercel does not treat
+// that folder as a static build output directory.
+app.use(express.static(path.resolve(process.cwd(), "web")));
 
 app.get("/health", (_req: Request, res: Response) => {
   res.json({ ok: true });
