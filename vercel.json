@@ -1,5 +1,4 @@
 {
-  "installCommand": "npm install && node scripts/download-geolite2.mjs",
   "functions": {
     "src/app.ts": {
       "includeFiles": "data/**"
