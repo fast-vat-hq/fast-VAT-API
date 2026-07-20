@@ -1,7 +1,14 @@
 {
-  "functions": {
-    "src/app.ts": {
-      "includeFiles": "data/**"
+  "version": 2,
+  "buildCommand": "node scripts/noop-build.mjs",
+  "builds": [
+    {
+      "src": "api/index.ts",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": ["data/**", "public/**"]
+      }
     }
-  }
+  ],
+  "routes": [{ "src": "/(.*)", "dest": "api/index.ts" }]
 }

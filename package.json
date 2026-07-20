@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch --env-file=.env src/local-server.ts",
-    "build": "node -e \"console.log('No compile step — Vercel runs TypeScript via src/app.ts')\"",
+    "build": "node scripts/noop-build.mjs",
     "start": "tsx --env-file=.env src/local-server.ts",
     "typecheck": "tsc --noEmit",
     "postinstall": "node scripts/download-geolite2.mjs"
