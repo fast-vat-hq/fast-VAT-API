@@ -1,5 +1,6 @@
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { Reader, type ReaderModel } from "@maxmind/geoip2-node";
 
 /**
@@ -10,7 +11,19 @@ import { Reader, type ReaderModel } from "@maxmind/geoip2-node";
  * no network round-trips.
  */
 
-const DB_PATH = path.resolve(process.cwd(), "data", "GeoLite2-Country.mmdb");
+function resolveDbPath(): string {
+  const candidates = [
+    path.resolve(process.cwd(), "data", "GeoLite2-Country.mmdb"),
+    // Vercel bundles included files relative to the function package root.
+    path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "data", "GeoLite2-Country.mmdb"),
+  ];
+  for (const candidate of candidates) {
+    if (existsSync(candidate)) return candidate;
+  }
+  return candidates[0]!;
+}
+
+const DB_PATH = resolveDbPath();
 
 let reader: ReaderModel | null = null;
 
