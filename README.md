@@ -34,10 +34,10 @@ src/
   bin.ts     Card BIN -> issuing country (cache + binlist.net fallback)
   vies.ts    EU VIES VAT number validation (3s timeout, cache fallback)
   audit.ts   Compliance audit trail writer
-  app.ts     Express app and routes
-  server.ts  Local dev entry (npm run dev)
-api/
-  index.ts   Vercel serverless entry
+  app.ts     Express app (default export — Vercel entry)
+  local-server.ts  Local dev entry (npm run dev)
+public/
+  index.html Interactive API tester UI
 db/
   schema.sql Supabase tables (run once in SQL editor)
 data/
@@ -71,10 +71,9 @@ data/
 
 ## Deploying to Vercel
 
-1. Import this GitHub repo at vercel.com/new (framework preset: **Other**).
-2. Set two environment variables in the project settings:
-   - `DATABASE_URL` - the Supabase transaction-pooler connection string
-   - `MAXMIND_LICENSE_KEY` - from the MaxMind account portal
-     (Manage License Keys); the build downloads GeoLite2 automatically
-     via `scripts/download-geolite2.mjs`.
-3. Deploy. The tester UI is served at the root URL, the API under `/v1/`.
+1. In Vercel project **Settings → Build and Deployment**, set **Framework Preset** to **Express**.
+2. Leave Build Command / Output Directory overrides **off**.
+3. Set environment variables:
+   - `DATABASE_URL` — Supabase transaction-pooler connection string
+   - `MAXMIND_LICENSE_KEY` — from MaxMind account → Manage License Keys
+4. Redeploy. Tester UI at `/`, API under `/v1/`.
