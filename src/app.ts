@@ -9,8 +9,9 @@ import { writeAuditLog } from "./audit.js";
 export const app = express();
 app.use(express.json());
 
-// Interactive API tester, served at the root URL.
-app.use(express.static(path.resolve(process.cwd(), "public")));
+// Interactive API tester UI (folder is "web", not "public", so Vercel
+// does not treat it as a static build output directory).
+app.use(express.static(path.resolve(process.cwd(), "web")));
 
 app.get("/health", (_req: Request, res: Response) => {
   res.json({ ok: true });

@@ -1,11 +1,10 @@
 {
   "framework": null,
   "installCommand": "npm install && node scripts/download-geolite2.mjs",
-  "buildCommand": "",
-  "outputDirectory": "",
+  "buildCommand": "npm run build",
   "functions": {
     "api/index.ts": {
-      "includeFiles": "data/**"
+      "includeFiles": "{data/**,web/**}"
     }
   },
   "rewrites": [{ "source": "/(.*)", "destination": "/api" }]
