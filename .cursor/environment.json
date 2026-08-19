@@ -5,7 +5,8 @@
   "terminals": [
     {
       "name": "dev-server",
-      "command": "npm run dev"
+      "command": "npm run dev",
+      "description": "Fast-VAT-API Express dev server (tsx watch) on http://localhost:3000 — serves the tester UI at / and the API under /v1."
     }
   ],
   "ports": [
