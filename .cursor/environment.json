@@ -1,0 +1,18 @@
+{
+  "name": "Fast-VAT-API",
+  "install": "bash .cursor/install.sh",
+  "start": "bash .cursor/start.sh",
+  "terminals": [
+    {
+      "name": "dev-server",
+      "command": "npm run dev",
+      "description": "Fast-VAT-API Express dev server (tsx watch) on http://localhost:3000 — tester UI at / and the API under /v1. Reads DATABASE_URL/PORT from .env written by start.sh."
+    }
+  ],
+  "ports": [
+    {
+      "name": "api",
+      "port": 3000
+    }
+  ]
+}
